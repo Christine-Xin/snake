@@ -31,6 +31,7 @@ class Snake{
             throw new Error()
         }
         this.head.style.left=value+'px';
+        this.moveBody()
     }
 
     set Y(value:number){
@@ -42,12 +43,27 @@ class Snake{
             throw new Error()
         }
         this.head.style.top=value+'px';
+        this.moveBody()
     }
 
     // 蛇增加长度
     addBody(){
         // 像snake增加div
         this.element.insertAdjacentHTML("beforeend","<div></div>")
+    }
+    // 移动蛇的身体
+    moveBody(){
+        /**
+         * 将后面的身体设置为前面身体的位置,不用设置蛇头，因为蛇头的位置已经在前面修改过
+         * 第三节 = 第二节的位置
+         * 第二节 = 蛇头的位置
+         */
+        for(let i = this.bodies.length-1;i>0; i--){
+            let X= (this.bodies[i-1] as HTMLElement).offsetLeft;
+            let Y = (this.bodies[i-1] as HTMLElement).offsetTop;
+            (this.bodies[i] as HTMLElement).style.left= X+ 'px';
+            (this.bodies[i] as HTMLElement).style.top= Y+ 'px';
+        }
     }
 }
 
