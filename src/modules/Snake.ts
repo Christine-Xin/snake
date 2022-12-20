@@ -22,10 +22,25 @@ class Snake{
     }
 
     set X(value:number){
+        // 如果新值和旧值相同则直接返回
+        if(this.X== value){
+            return
+        }
+        // X的值合法范围0-290
+        if(value<0 || value > 290){
+            throw new Error()
+        }
         this.head.style.left=value+'px';
     }
 
     set Y(value:number){
+        // 如果新值和旧值相同则直接返回
+        if(this.Y== value){
+            return
+        }
+        if(value<0 || value > 290){
+            throw new Error()
+        }
         this.head.style.top=value+'px';
     }
 

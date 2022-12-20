@@ -55,10 +55,30 @@ class GameControl {
                 X-=10;
                 break;
         }
+        // 检查蛇是否吃到食物:
+        this.checkEat(X,Y)
 
+       try{
         this.snake.X=X
         this.snake.Y=Y
+       }catch(e){
+        alert('GAME OVER!')
+        this.isLive=false
+       }
         this.isLive && setTimeout(this.run.bind(this),300-(this.scorePanel.level-1)*30)
+    }
+    // 定义方法，用来检查蛇是否检查到食物
+    /**
+     * 当蛇头的坐标和食物的坐标重合时，代表已经吃到食物
+     * 1:食物的位置重置 2：分数增加 3：蛇的身体增加
+     * 
+     */
+    checkEat(x:number,y:number):void{
+        if(x==this.food.x && y==this.food.y){
+            this.food.change()
+            this.scorePanel.addScore()
+            this.snake.addBody()
+        }
     }
 }
 
